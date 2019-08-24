@@ -1,0 +1,29 @@
+{% extends 'music/base.html' %}
+
+{% block body %}
+    <br/>
+        <div class="row" style="margin-left: 10px; margin-right: 10px">
+            {% for song in all_songs %}
+                <div class="col-sm-6">
+                    <br />
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>{{ song.album }}</h3>
+                            <h6>{{ song.song_title }}</h5>
+                            <audio controls>
+                                <source src="{{ song.files.url }}" type="audio/mpeg">
+                            </audio>
+                            <div class="footer">
+                                <a href="{{ delete_song_absolute_url }}">
+                                    <button class="btn btn-outline-danger">
+                                        Delete The Song
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+{% endblock %}

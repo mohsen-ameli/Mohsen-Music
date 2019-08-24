@@ -1,0 +1,113 @@
+{% extends 'music/base.html' %}
+{% block title %}{{ album }}{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+<br/>
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <!-- Left Album Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="card border-dark mb-3">
+                <div class="card-body">
+                    <a href="{% url 'music:detail' album.id %}">
+                        {% if album.logo %}
+                            <img class="card-img-top" src="{{ album.logo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <div class="card-title"><h1>{{ album.album_title }} <small>{{ album.genre }}</small></h1></div>
+                    <h2>{{ album.artist }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Song Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <div class="row">
+                <ul class="nav nav-pills" style="margin-left: 15px; margin-bottom: 10px;">
+                    <a href="{% url 'music:song-create' %}">
+                        <button class="btn btn-outline-warning">
+                            Add New Song
+                        </button>
+                    </a>
+                </ul>
+                
+                <ul class="nav nav-pills" style="margin-left: 15px; margin-bottom: 10px;">
+                    <a href="{{ album.update_absolute_url }}">
+                        <button class="btn btn-outline-info">
+                            Edit The Album
+                        </button>
+                    </a>
+                </ul>
+
+                <ul class="nav nav-pills" style="margin-left: 15px; margin-bottom: 10px;">
+                    <a href="{{ album.delete_absolute_url }}">
+                        <button class="btn btn-outline-danger">
+                            Delete The Album
+                        </button>
+                    </a>
+                </ul>
+            </div>            
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h3>All Songs</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Audio File</th>
+                                <th>Favorite</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for song in album.song_set.all %}
+                                <tr>
+                                    <td>{{ song.song_title }}</td>
+                                    <td>
+                                        <audio controls style="margin:0px">
+                                            <source src="{{ song.files.url }}" type="audio/mpeg">
+                                        </audio>
+                                        <!-- <a href="{{ song.files.url }}">
+                                            <button type="button" class="btn btn-success btn-xs">
+                                                <span class="glyphicon glyphicon-play"></span>&nbsp; Play
+                                            </button>
+                                        </a> -->
+                                    </td>
+
+                                    <td>
+                                        <a href="#" class="btn-favorite"><span class="fa fa-star {% if song.is_favorite %}active{% endif %}"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ song.get_absolute_url_delete }}">
+                                            <button type="submit" class="btn btn-outline-danger btn-xs">
+                                                <span class="fa fa-remove"></span>&nbsp; Delete
+                                            </button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

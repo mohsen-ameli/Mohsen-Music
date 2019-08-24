@@ -1,0 +1,47 @@
+{% extends 'music/base.html' %}
+{% block albums_active %}active{% endblock %}
+
+{% block body %}
+
+    <br/>
+    {% if all_albums %}
+        <div class="container-fluid padding">
+            <div class="row" style="margin-left: 10px">
+                {% for album in all_albums %}
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                        <div class="card" style="width: 18rem; margin-bottom: 20px">
+                            
+                            {% if album.logo %}
+                                <a href="{% url 'music:detail' album.id %}">
+                                    <img src="{{ album.logo.url }}" class="card-img-top" style="width: 18rem">
+                                </a>
+                            {% endif %}
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">{{ album.album_title }}</h5>
+                                <p class="card-text">By {{ album.artist }}</p>
+                                <a href="{% url 'music:detail' album.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                            </div>
+                            <!-- <a href="#">
+                                <button type="button" class="btn btn-success">
+                                    <span class="fa fa-plus"></span>&nbsp; Add an Album
+                                </button>
+                            </a> -->
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="col-sm-12">
+            <br>
+            <a href="#">
+                <button type="button" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+                </button>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}

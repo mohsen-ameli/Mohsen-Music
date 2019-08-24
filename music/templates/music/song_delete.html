@@ -1,0 +1,8 @@
+{% extends 'music/base.html' %}
+{% block body %}
+    <form action="." method="post">{% csrf_token %}
+        <p style="color: white;">Are you sure you want to delete the song?</p>
+        <input class="btn btn-danger" type="submit" value="Yes, I do." />
+        <input class="btn btn-info" type="submit" value="Np, I don't." />
+    </form>
+{% endblock %}
