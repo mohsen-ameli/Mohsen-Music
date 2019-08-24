@@ -26,7 +26,7 @@ SECRET_KEY = '1y#efz4*jeaib-9qvj^@e2&d@bh9cgm-kv5lwgbxvx+*e+jxnd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mohsenmusic.herokuapp.com']
 
 
 # Application definition
