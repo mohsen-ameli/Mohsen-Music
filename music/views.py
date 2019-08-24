@@ -2,9 +2,9 @@ from django.views import generic
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Album, Song
+from django.shortcuts import render, redirect, get_object_or_404
 
 
-from django.shortcuts import render
 def About(request):
     return render(request, 'music/about.html', {})
 
@@ -55,5 +55,22 @@ class SongList(generic.ListView):
 
 class SongDelete(DeleteView):
     model = Song
-    success_url = reverse_lazy('music:song-list')
+    #success_url = reverse_lazy('music:song-list')
     template_name = 'music/song_delete.html'
+
+    def get_queryset(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Song, id=id_)
+
+
+def SongDetail(request, id):
+    songs = get_object_or_404(Song, id=id)
+
+    if request.method == "POST":
+        songs.delete()
+        return redirect('/')
+
+    template_name = 'music/song_detail.html'
+    context = {"all_songs": songs}
+
+    return render(request, template_name, context)

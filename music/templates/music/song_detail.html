@@ -1,0 +1,33 @@
+{% extends 'music/base.html' %}
+
+{% block body %}
+
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h5>Are you sure you want to delete the following song ?</h5>
+                        </div>
+                        <hr/>
+
+                        <audio controls>
+                            <source src="{{ all_songs.files.url }}" type="audio/mpeg">
+                        </audio>
+
+                        <div class="footer">
+                            <form action="." method="post">{% csrf_token %}
+                                <br />
+                                <input class="btn btn-danger" type="submit" value="Yes, I do." />
+                                <input class="btn btn-info" type="submit" value="No, I don't." />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

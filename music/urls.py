@@ -23,8 +23,8 @@ urlpatterns = [
     path('album/<pk>/update/', views.AlbumUpdate.as_view(), name='album-update'),
 
     path('song/create/', views.SongCreate.as_view(), name='song-create'),
-    path('song/<int:id>/delete', views.SongDelete.as_view(), name='song-delete'),
     path('song/all/', views.SongList.as_view(), name='song-list'),
+    path('song/<id>/', views.SongDetail, name='song-detail'),
 
 ]
 

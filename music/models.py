@@ -30,4 +30,4 @@ class Song(models.Model):
         return str(self.files) + ' - ' + str(self.id)
 
     def delete_song_absolute_url(self):
-        return reverse(viewname='music:song-delete', kwargs={'id': self.id})
+        return reverse(viewname='music:song-detail', kwargs={'id': self.id})
