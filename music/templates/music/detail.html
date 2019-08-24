@@ -18,8 +18,11 @@
                             <h3>No image to display</h3>
                         {% endif %}
                     </a>
-                    <div class="card-title"><h1>{{ album.album_title }} <small>{{ album.genre }}</small></h1></div>
-                    <h2>{{ album.artist }}</h2>
+                    <div class="card-title">
+                        <h1>{{ album.album_title|title }}
+                        <small>{{ album.genre|title }}</small></h1>
+                    </div>
+                    <h3>{{ album.artist }}</h3>
                 </div>
             </div>
         </div>
@@ -79,18 +82,13 @@
                                         <audio controls style="margin:0px">
                                             <source src="{{ song.files.url }}" type="audio/mpeg">
                                         </audio>
-                                        <!-- <a href="{{ song.files.url }}">
-                                            <button type="button" class="btn btn-success btn-xs">
-                                                <span class="glyphicon glyphicon-play"></span>&nbsp; Play
-                                            </button>
-                                        </a> -->
                                     </td>
 
                                     <td>
                                         <a href="#" class="btn-favorite"><span class="fa fa-star {% if song.is_favorite %}active{% endif %}"></span></a>
                                     </td>
                                     <td>
-                                        <a href="{{ song.get_absolute_url_delete }}">
+                                        <a href="{{ song.delete_song_absolute_url }}">
                                             <button type="submit" class="btn btn-outline-danger btn-xs">
                                                 <span class="fa fa-remove"></span>&nbsp; Delete
                                             </button>
