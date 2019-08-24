@@ -1,0 +1,10 @@
+body{
+    background: rgb(255, 255, 255) url("images/6.free-carbon-fiber-textures.jpg");
+}
+
+.navbar-brand{
+  font-family: 'Great Vibes', cursive;
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Pacifico', cursive;
+  font-family: 'Satisfy', cursive;
+}
